@@ -5,11 +5,35 @@ import ProjectsSection from './components/ProjectsSection';
 import DocsSection from './components/DocsSection';
 import CommunitySection from './components/CommunitySection';
 
+const VALID_DESTINATIONS = ['overview', 'projects', 'docs', 'contact'];
+
+const getDestinationFromHash = () => {
+  const hash = window.location.hash.replace('#', '').trim();
+  return VALID_DESTINATIONS.includes(hash) ? hash : 'overview';
+};
+
 export default function App() {
-  const [activeDestination, setActiveDestination] = useState('overview'); // 'overview' | 'projects' | 'docs' | 'contact'
+  const [activeDestination, setActiveDestination] = useState(() => getDestinationFromHash());
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [theme, setTheme] = useState(() => localStorage.getItem('md3_theme') || 'dark');
+
+  // Sync window.location.hash when activeDestination changes
+  useEffect(() => {
+    if (window.location.hash !== `#${activeDestination}`) {
+      window.location.hash = activeDestination;
+    }
+  }, [activeDestination]);
+
+  // Listen to browser hashchange (Back / Forward navigation or manual URL edit)
+  useEffect(() => {
+    const handleHashChange = () => {
+      const dest = getDestinationFromHash();
+      setActiveDestination(dest);
+    };
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
 
   // Sync theme attribute on <html> element
   useEffect(() => {
