@@ -1,0 +1,263 @@
+/* Material Design 3 Design System — nonFeature Custom Palette */
+
+@font-face {
+  font-family: "Feature Mono";
+  src: url("./assets/fonts/FeatureMono-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Material Symbols Icon Integration (Outlined, Rounded, Sharp) */
+.material-symbols-outlined,
+.material-symbols-rounded,
+.material-symbols-sharp {
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+}
+
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+}
+
+.material-symbols-rounded {
+  font-family: 'Material Symbols Rounded';
+}
+
+.material-symbols-sharp {
+  font-family: 'Material Symbols Sharp';
+}
+
+/* Filled icon variation modifier */
+.material-symbols-filled {
+  font-variation-settings: 'FILL' 1;
+}
+
+:root {
+  font-family: 'Google Sans', 'Roboto', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  font-weight: 400;
+  color-scheme: dark;
+
+  /* User's Exact Color Palette: #eec643, #e24700, #2d2d2a, #101113 */
+  --color-gold: #eec643;
+  --color-flame: #e24700;
+  --color-jet: #2d2d2a;
+  --color-night: #101113;
+
+  /* Material Design 3 System Tokens (Night / Dark Theme Default) */
+  --md-sys-color-primary: var(--color-gold);
+  --md-sys-color-on-primary: #101113;
+  --md-sys-color-primary-container: rgba(238, 198, 67, 0.15);
+  --md-sys-color-on-primary-container: #ffe89e;
+
+  --md-sys-color-secondary: var(--color-flame);
+  --md-sys-color-on-secondary: #ffffff;
+  --md-sys-color-secondary-container: rgba(226, 71, 0, 0.18);
+  --md-sys-color-on-secondary-container: #ffdbd0;
+
+  --md-sys-color-tertiary: #d4a373;
+  --md-sys-color-on-tertiary: #1c1917;
+
+  --md-sys-color-background: var(--color-night);
+  --md-sys-color-on-background: #f3f4f6;
+  
+  --md-sys-color-surface: var(--color-night);
+  --md-sys-color-on-surface: #f3f4f6;
+  --md-sys-color-on-surface-variant: #9ca3af;
+  --md-sys-color-outline: #4b5563;
+  --md-sys-color-outline-variant: #262930;
+
+  /* Surface Container Levels */
+  --md-sys-color-surface-container-lowest: #0b0c0e;
+  --md-sys-color-surface-container-low: #15171c;
+  --md-sys-color-surface-container: #1b1e24;
+  --md-sys-color-surface-container-high: var(--color-jet);
+  --md-sys-color-surface-container-highest: #383834;
+
+  /* Elevations & Glows */
+  --md-sys-elevation-1: 0px 4px 12px rgba(0, 0, 0, 0.4);
+  --md-sys-elevation-2: 0px 8px 24px rgba(0, 0, 0, 0.6);
+  --md-sys-elevation-3: 0px 12px 32px rgba(0, 0, 0, 0.8);
+  
+  --glow-primary: 0 0 24px rgba(238, 198, 67, 0.25);
+  --glow-secondary: 0 0 24px rgba(226, 71, 0, 0.25);
+
+  /* Radius Tokens */
+  --md-sys-shape-corner-xs: 4px;
+  --md-sys-shape-corner-s: 8px;
+  --md-sys-shape-corner-m: 14px;
+  --md-sys-shape-corner-l: 20px;
+  --md-sys-shape-corner-xl: 28px;
+  --md-sys-shape-corner-full: 9999px;
+}
+
+[data-theme="light"] {
+  /* Override custom palette variables for Light Mode */
+  --color-jet: #ededf2;
+  --color-night: #f8f9fc;
+
+  /* M3 Light System Tokens */
+  --md-sys-color-primary: #b88d00;
+  --md-sys-color-on-primary: #ffffff;
+  --md-sys-color-primary-container: #fff1b8;
+  --md-sys-color-on-primary-container: #3d2e00;
+
+  --md-sys-color-secondary: #e24700;
+  --md-sys-color-on-secondary: #ffffff;
+  --md-sys-color-secondary-container: #ffe8df;
+  --md-sys-color-on-secondary-container: #4d1500;
+
+  --md-sys-color-tertiary: #825500;
+  --md-sys-color-on-tertiary: #ffffff;
+
+  --md-sys-color-background: #f8f9fc;
+  --md-sys-color-on-background: #191c20;
+  
+  --md-sys-color-surface: #ffffff;
+  --md-sys-color-on-surface: #191c20;
+  --md-sys-color-on-surface-variant: #44474e;
+  --md-sys-color-outline: #74777f;
+  --md-sys-color-outline-variant: #c4c6d0;
+
+  /* Light Surface Container Levels */
+  --md-sys-color-surface-container-lowest: #ffffff;
+  --md-sys-color-surface-container-low: #f3f3f8;
+  --md-sys-color-surface-container: #ededf2;
+  --md-sys-color-surface-container-high: #e7e7ec;
+  --md-sys-color-surface-container-highest: #e1e2e7;
+
+  /* Light Elevation Shadows */
+  --md-sys-elevation-1: 0px 2px 8px rgba(0, 0, 0, 0.06), 0px 1px 2px rgba(0, 0, 0, 0.04);
+  --md-sys-elevation-2: 0px 4px 16px rgba(0, 0, 0, 0.08), 0px 2px 4px rgba(0, 0, 0, 0.04);
+  --md-sys-elevation-3: 0px 8px 24px rgba(0, 0, 0, 0.12), 0px 4px 8px rgba(0, 0, 0, 0.06);
+
+  --glow-primary: 0 0 20px rgba(184, 141, 0, 0.2);
+  --glow-secondary: 0 0 20px rgba(226, 71, 0, 0.2);
+}
+
+[data-theme="amoled"] {
+  /* Pure Pitch Black AMOLED Tokens */
+  --color-jet: #0a0b0d;
+  --color-night: #000000;
+
+  --md-sys-color-primary: #eec643;
+  --md-sys-color-on-primary: #000000;
+  --md-sys-color-primary-container: rgba(238, 198, 67, 0.22);
+  --md-sys-color-on-primary-container: #ffe89e;
+
+  --md-sys-color-secondary: #e24700;
+  --md-sys-color-on-secondary: #ffffff;
+  --md-sys-color-secondary-container: rgba(226, 71, 0, 0.25);
+  --md-sys-color-on-secondary-container: #ffdbd0;
+
+  --md-sys-color-background: #000000;
+  --md-sys-color-on-background: #ffffff;
+  
+  --md-sys-color-surface: #000000;
+  --md-sys-color-on-surface: #ffffff;
+  --md-sys-color-on-surface-variant: #a0a5ad;
+  --md-sys-color-outline: #3a3d45;
+  --md-sys-color-outline-variant: #1a1c20;
+
+  /* AMOLED Surface Container Levels */
+  --md-sys-color-surface-container-lowest: #000000;
+  --md-sys-color-surface-container-low: #050607;
+  --md-sys-color-surface-container: #0a0b0d;
+  --md-sys-color-surface-container-high: #121316;
+  --md-sys-color-surface-container-highest: #1a1c21;
+
+  --glow-primary: 0 0 28px rgba(238, 198, 67, 0.35);
+  --glow-secondary: 0 0 28px rgba(226, 71, 0, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+}
+
+button:hover {
+  filter: brightness(1.12);
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+body {
+  background-color: var(--md-sys-color-background);
+  color: var(--md-sys-color-on-background);
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-size: 16px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--md-sys-color-background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--md-sys-color-surface-container-high);
+  border-radius: 5px;
+  border: 2px solid var(--md-sys-color-background);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--md-sys-color-primary);
+}
+
+/* Glassmorphism utility */
+.glass-panel {
+  background: rgba(45, 45, 42, 0.4);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(238, 198, 67, 0.12);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.05);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
