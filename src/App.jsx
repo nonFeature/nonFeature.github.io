@@ -14,9 +14,17 @@ const getDestinationFromHash = () => {
 
 export default function App() {
   const [activeDestination, setActiveDestination] = useState(() => getDestinationFromHash());
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(() => {
+    const saved = localStorage.getItem('md3_drawer_collapsed');
+    return saved !== null ? JSON.parse(saved) : false;
+  });
   const [mobileOpen, setMobileOpen] = useState(false);
   const [theme, setTheme] = useState(() => localStorage.getItem('md3_theme') || 'dark');
+
+  // Persist desktop drawer collapsed state in localStorage
+  useEffect(() => {
+    localStorage.setItem('md3_drawer_collapsed', JSON.stringify(collapsed));
+  }, [collapsed]);
 
   // Sync window.location.hash when activeDestination changes
   useEffect(() => {
