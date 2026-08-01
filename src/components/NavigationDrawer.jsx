@@ -24,6 +24,17 @@ export default function NavigationDrawer({
   mobileOpen,
   onCloseMobile
 }) {
+  React.useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileOpen]);
+
   const handleSelect = (id) => {
     onSelectDestination(id);
     if (onCloseMobile) onCloseMobile();
@@ -144,12 +155,14 @@ export default function NavigationDrawer({
           position: sticky;
           top: 0;
           height: 100vh;
+          height: 100dvh;
           z-index: 100;
         }
 
         .m3-navigation-drawer {
           width: 300px;
           height: 100vh;
+          height: 100dvh;
           position: relative;
           background-color: var(--color-jet);
           border-right: 1px solid var(--md-sys-color-outline-variant);
@@ -380,6 +393,9 @@ export default function NavigationDrawer({
           .mobile-drawer-backdrop {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
+            height: 100vh;
+            height: 100dvh;
+            height: -webkit-fill-available;
             background: rgba(0, 0, 0, 0.65);
             backdrop-filter: blur(4px);
             z-index: 990 !important;
@@ -398,6 +414,10 @@ export default function NavigationDrawer({
             top: 0; left: 0; bottom: 0;
             width: min(320px, calc(100vw - 56px)) !important;
             height: 100vh;
+            height: 100dvh;
+            height: -webkit-fill-available;
+            display: flex !important;
+            flex-direction: column !important;
             transform: translate3d(-100%, 0, 0) !important;
             box-shadow: none !important;
             border-right: none !important;
@@ -405,6 +425,10 @@ export default function NavigationDrawer({
             overflow: hidden !important;
             transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
             will-change: transform;
+          }
+
+          .drawer-footer {
+            padding-bottom: max(16px, env(safe-area-inset-bottom));
           }
 
           .m3-navigation-drawer.mobile-open {
