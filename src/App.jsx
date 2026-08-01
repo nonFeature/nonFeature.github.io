@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import NavigationDrawer from './components/NavigationDrawer';
+import OrgHome from './components/OrgHome';
+import ProjectsSection from './components/ProjectsSection';
+import DocsSection from './components/DocsSection';
+import CommunitySection from './components/CommunitySection';
 
 export default function App() {
-  const [activeDestination, setActiveDestination] = useState('overview'); // 'overview' | 'projects' | 'docs'
+  const [activeDestination, setActiveDestination] = useState('overview'); // 'overview' | 'projects' | 'docs' | 'contact'
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [theme, setTheme] = useState(() => localStorage.getItem('md3_theme') || 'dark');
@@ -47,8 +51,11 @@ export default function App() {
       {/* Main Content Workspace */}
       <div className="m3-workspace">
         <main className="m3-content-body">
-          <div className="destination-pane animate-fade-in">
-            {/* Content canvas ready for customization */}
+          <div className="destination-pane animate-fade-in" key={activeDestination}>
+            {activeDestination === 'overview' && <OrgHome />}
+            {activeDestination === 'projects' && <ProjectsSection />}
+            {activeDestination === 'docs' && <DocsSection />}
+            {activeDestination === 'contact' && <CommunitySection />}
           </div>
         </main>
       </div>

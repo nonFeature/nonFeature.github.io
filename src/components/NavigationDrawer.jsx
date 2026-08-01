@@ -11,7 +11,8 @@ const GithubIcon = () => (
 const DESTINATIONS = [
   { id: 'overview', label: 'Главная', icon: 'home' },
   { id: 'projects', label: 'Проекты', icon: 'grid_view' },
-  { id: 'docs', label: 'Документация', icon: 'auto_stories' }
+  { id: 'docs', label: 'Документация', icon: 'auto_stories' },
+  { id: 'contact', label: 'Связь', icon: 'alternate_email' }
 ];
 
 export default function NavigationDrawer({ 
@@ -117,36 +118,6 @@ export default function NavigationDrawer({
               </span>
             </div>
           </button>
-
-          <a 
-            href="https://github.com/nonFeature" 
-            target="_blank" 
-            rel="noreferrer" 
-            className="footer-action-item"
-          >
-            <div className="icon-indicator">
-              <GithubIcon />
-            </div>
-            
-            <div className="label-container">
-              <span className="destination-label">GitHub</span>
-            </div>
-          </a>
-
-          <a 
-            href="https://t.me/nonfeature" 
-            target="_blank" 
-            rel="noreferrer" 
-            className="footer-action-item"
-          >
-            <div className="icon-indicator flame">
-              <span className="material-symbols-outlined">send</span>
-            </div>
-            
-            <div className="label-container">
-              <span className="destination-label">Telegram</span>
-            </div>
-          </a>
         </div>
       </aside>
 
@@ -376,6 +347,55 @@ export default function NavigationDrawer({
           background-color: var(--md-sys-color-surface-container-high);
           color: var(--color-gold);
           border: 1px solid rgba(238, 198, 67, 0.25);
+        }
+
+        .contact-menu-wrapper {
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+        }
+
+        .contact-sub-items {
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+          padding-left: 12px;
+          transition: all 0.2s ease;
+        }
+
+        .sub-action-item {
+          display: flex;
+          align-items: center;
+          gap: 14px;
+          height: 48px;
+          padding: 0 8px;
+          border-radius: var(--md-sys-shape-corner-full);
+          background: var(--md-sys-color-surface-container-low);
+          border: 1px solid var(--md-sys-color-outline-variant);
+          color: var(--md-sys-color-on-surface-variant);
+          font-family: 'Google Sans', sans-serif;
+          font-size: 0.88rem;
+          cursor: pointer;
+          text-decoration: none;
+          transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+          justify-content: flex-start;
+          overflow: hidden;
+        }
+
+        .sub-action-item:hover {
+          background-color: var(--md-sys-color-surface-container-high);
+          color: var(--color-gold);
+          border: 1px solid rgba(238, 198, 67, 0.25);
+        }
+
+        .expand-arrow {
+          font-size: 20px;
+          margin-left: auto;
+          opacity: 0.7;
+        }
+
+        .m3-navigation-drawer.collapsed .contact-sub-items {
+          padding-left: 0;
         }
 
         .icon-indicator.flame {
