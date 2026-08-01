@@ -76,9 +76,9 @@ export default function NavigationDrawer({
           </span>
         </button>
 
-        {/* Drawer Header */}
+        {/* Drawer Header (Non-interactive) */}
         <div className="drawer-header">
-          <div className="brand-group" onClick={() => handleSelect('overview')}>
+          <div className="brand-group">
             <img src={logoIcon} alt="nonFeature" className="brand-logo-img" />
             <div className="brand-titles">
               <span className="brand-name">nonFeature</span>
@@ -212,7 +212,8 @@ export default function NavigationDrawer({
           display: flex;
           align-items: center;
           gap: 14px;
-          cursor: pointer;
+          cursor: default;
+          user-select: none;
           min-width: 0;
         }
 
