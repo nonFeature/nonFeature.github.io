@@ -23,7 +23,7 @@ export default function App() {
 
   return (
     <div className="m3-app-shell">
-      {/* Floating Mobile Trigger Button (Compact Arrow) */}
+      {/* Floating Mobile Trigger Button (Fixed z-index: 50, strictly lower than drawer z-index: 1000) */}
       <button 
         className="mobile-floating-trigger" 
         onClick={() => setMobileOpen(true)}
@@ -32,7 +32,7 @@ export default function App() {
         <span className="material-symbols-outlined">chevron_right</span>
       </button>
 
-      {/* Side Navigation Drawer (MD3 Persistent on Desktop / Modal Slide-out on Mobile) */}
+      {/* Side Navigation Drawer */}
       <NavigationDrawer
         activeDestination={activeDestination}
         onSelectDestination={setActiveDestination}
@@ -61,11 +61,11 @@ export default function App() {
           color: var(--md-sys-color-on-background);
         }
 
-        /* Floating Mobile Arrow Trigger */
+        /* Floating Mobile Trigger Button (Strictly z-index: 50) */
         .mobile-floating-trigger {
           display: none;
           position: fixed;
-          top: 20px;
+          top: 16px;
           left: 16px;
           width: 44px;
           height: 44px;
@@ -75,13 +75,19 @@ export default function App() {
           color: var(--color-gold);
           align-items: center;
           justify-content: center;
-          z-index: 900;
+          z-index: 50 !important;
           box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
           cursor: pointer;
+          transition: transform 0.2s ease, background-color 0.2s ease;
         }
 
         .mobile-floating-trigger:active {
           transform: scale(0.92);
+        }
+
+        .mobile-floating-trigger:hover {
+          background-color: var(--color-gold);
+          color: #101113;
         }
 
         .m3-workspace {

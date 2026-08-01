@@ -30,11 +30,12 @@ export default function NavigationDrawer({
   };
 
   return (
-    <>
-      {/* Backdrop overlay for mobile sliding drawer */}
-      {mobileOpen && (
-        <div className="mobile-drawer-backdrop" onClick={onCloseMobile} />
-      )}
+    <div className="drawer-outer-wrapper">
+      {/* Backdrop overlay with smooth opacity transition */}
+      <div 
+        className={`mobile-drawer-backdrop ${mobileOpen ? 'active' : ''}`} 
+        onClick={onCloseMobile} 
+      />
 
       <aside className={`m3-navigation-drawer ${collapsed ? 'collapsed' : ''} ${mobileOpen ? 'mobile-open' : ''}`}>
         {/* Floating Toggle Button on Right Border (Desktop) */}
@@ -52,19 +53,15 @@ export default function NavigationDrawer({
         <div className="drawer-header">
           <div className="brand-group" onClick={() => handleSelect('overview')}>
             <img src={logoIcon} alt="nonFeature" className="brand-logo-img" />
-            {(!collapsed || mobileOpen) && (
-              <div className="brand-titles">
-                <span className="brand-name">nonFeature</span>
-              </div>
-            )}
+            <div className="brand-titles">
+              <span className="brand-name">nonFeature</span>
+            </div>
           </div>
 
           {/* Close button on mobile */}
-          {mobileOpen && (
-            <button className="mobile-close-btn" onClick={onCloseMobile}>
-              <span className="material-symbols-outlined">close</span>
-            </button>
-          )}
+          <button className="mobile-close-btn" onClick={onCloseMobile} title="Закрыть">
+            <span className="material-symbols-outlined">close</span>
+          </button>
         </div>
 
         {/* Drawer Destinations List */}
@@ -82,11 +79,9 @@ export default function NavigationDrawer({
                   <span className="material-symbols-outlined">{item.icon}</span>
                 </div>
                 
-                {(!collapsed || mobileOpen) && (
-                  <div className="label-container">
-                    <span className="destination-label">{item.label}</span>
-                  </div>
-                )}
+                <div className="label-container">
+                  <span className="destination-label">{item.label}</span>
+                </div>
               </button>
             );
           })}
@@ -102,13 +97,14 @@ export default function NavigationDrawer({
                 {theme === 'amoled' && 'contrast'}
               </span>
             </div>
-            {(!collapsed || mobileOpen) && (
-              <span>
+            
+            <div className="label-container">
+              <span className="destination-label">
                 {theme === 'light' && 'Светлая тема'}
                 {theme === 'dark' && 'Тёмная тема'}
                 {theme === 'amoled' && 'AMOLED (Чёрная)'}
               </span>
-            )}
+            </div>
           </button>
 
           <a 
@@ -120,7 +116,10 @@ export default function NavigationDrawer({
             <div className="icon-indicator">
               <GithubIcon />
             </div>
-            {(!collapsed || mobileOpen) && <span>GitHub</span>}
+            
+            <div className="label-container">
+              <span className="destination-label">GitHub</span>
+            </div>
           </a>
 
           <a 
@@ -132,28 +131,39 @@ export default function NavigationDrawer({
             <div className="icon-indicator flame">
               <span className="material-symbols-outlined">send</span>
             </div>
-            {(!collapsed || mobileOpen) && <span>Telegram</span>}
+            
+            <div className="label-container">
+              <span className="destination-label">Telegram</span>
+            </div>
           </a>
         </div>
       </aside>
 
       <style>{`
+        .drawer-outer-wrapper {
+          position: sticky;
+          top: 0;
+          height: 100vh;
+          z-index: 100;
+        }
+
         .m3-navigation-drawer {
           width: 300px;
           height: 100vh;
-          position: sticky;
-          top: 0;
+          position: relative;
           background-color: var(--color-jet);
           border-right: 1px solid var(--md-sys-color-outline-variant);
           display: flex;
           flex-direction: column;
           flex-shrink: 0;
-          transition: width 0.25s cubic-bezier(0.2, 0, 0, 1), transform 0.3s cubic-bezier(0.2, 0, 0, 1);
+          transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+          will-change: width, transform;
           z-index: 100;
+          overflow: visible !important;
         }
 
         .m3-navigation-drawer.collapsed {
-          width: 80px;
+          width: 78px;
         }
 
         /* Floating Toggle Button on the Right Border Edge (Desktop) */
@@ -171,9 +181,9 @@ export default function NavigationDrawer({
           align-items: center;
           justify-content: center;
           cursor: pointer;
-          z-index: 110;
+          z-index: 120;
           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-          transition: all 0.2s ease;
+          transition: background-color 0.2s ease, transform 0.2s ease;
         }
 
         .collapse-toggle-btn-floating:hover {
@@ -186,19 +196,16 @@ export default function NavigationDrawer({
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding: 20px 18px;
+          padding: 0 16px;
           height: 80px;
-        }
-
-        .m3-navigation-drawer.collapsed .drawer-header {
-          justify-content: center;
-          padding: 20px 0;
+          flex-shrink: 0;
+          overflow: hidden;
         }
 
         .brand-group {
           display: flex;
           align-items: center;
-          gap: 12px;
+          gap: 14px;
           cursor: pointer;
           min-width: 0;
         }
@@ -215,6 +222,12 @@ export default function NavigationDrawer({
           display: flex;
           flex-direction: column;
           min-width: 0;
+          transition: opacity 0.2s ease;
+        }
+
+        .m3-navigation-drawer.collapsed .brand-titles {
+          opacity: 0;
+          pointer-events: none;
         }
 
         .brand-name {
@@ -224,52 +237,52 @@ export default function NavigationDrawer({
           color: var(--md-sys-color-on-surface);
           line-height: 1.2;
           letter-spacing: -0.5px;
+          white-space: nowrap;
         }
 
         .mobile-close-btn {
+          display: none;
           background: none;
           border: none;
           color: var(--md-sys-color-on-surface-variant);
-          display: flex;
           align-items: center;
           justify-content: center;
           padding: 6px;
+          cursor: pointer;
         }
 
         .drawer-destinations {
           flex: 1;
-          padding: 16px 12px;
+          padding: 12px 10px;
           display: flex;
           flex-direction: column;
           gap: 6px;
           overflow-y: auto;
+          overflow-x: hidden;
         }
 
         .drawer-destination-item {
           display: flex;
           align-items: center;
-          gap: 12px;
+          gap: 14px;
           height: 56px;
-          padding: 0 12px;
+          padding: 0 8px;
           border-radius: var(--md-sys-shape-corner-full);
           background: transparent;
           border: 1px solid transparent;
           color: var(--md-sys-color-on-surface-variant);
           cursor: pointer;
-          transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+          transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
           text-decoration: none;
           width: 100%;
           text-align: left;
-        }
-
-        .m3-navigation-drawer.collapsed .drawer-destination-item {
-          justify-content: center;
-          padding: 0;
+          justify-content: flex-start;
+          overflow: hidden;
         }
 
         .icon-indicator {
-          width: 40px;
-          height: 32px;
+          width: 42px;
+          height: 36px;
           border-radius: var(--md-sys-shape-corner-full);
           display: flex;
           align-items: center;
@@ -282,11 +295,6 @@ export default function NavigationDrawer({
           background-color: var(--md-sys-color-surface-container-high);
           color: var(--color-gold);
           border: 1px solid rgba(238, 198, 67, 0.25);
-          transform: translateX(4px);
-        }
-
-        .m3-navigation-drawer.collapsed .drawer-destination-item:hover {
-          transform: scale(1.08);
         }
 
         .drawer-destination-item.active {
@@ -307,6 +315,12 @@ export default function NavigationDrawer({
           justify-content: space-between;
           flex: 1;
           min-width: 0;
+          transition: opacity 0.2s ease;
+        }
+
+        .m3-navigation-drawer.collapsed .label-container {
+          opacity: 0;
+          pointer-events: none;
         }
 
         .destination-label {
@@ -318,18 +332,20 @@ export default function NavigationDrawer({
         }
 
         .drawer-footer {
-          padding: 16px 12px;
+          padding: 12px 10px;
           display: flex;
           flex-direction: column;
           gap: 6px;
+          overflow: hidden;
+          flex-shrink: 0;
         }
 
         .footer-action-item {
           display: flex;
           align-items: center;
-          gap: 12px;
+          gap: 14px;
           height: 56px;
-          padding: 0 12px;
+          padding: 0 8px;
           border-radius: var(--md-sys-shape-corner-full);
           background: transparent;
           border: 1px solid transparent;
@@ -338,37 +354,43 @@ export default function NavigationDrawer({
           font-size: 0.92rem;
           cursor: pointer;
           text-decoration: none;
-          transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
-        }
-
-        .m3-navigation-drawer.collapsed .footer-action-item {
-          justify-content: center;
-          padding: 0;
+          transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+          justify-content: flex-start;
+          overflow: hidden;
         }
 
         .footer-action-item:hover {
           background-color: var(--md-sys-color-surface-container-high);
           color: var(--color-gold);
           border: 1px solid rgba(238, 198, 67, 0.25);
-          transform: translateX(4px);
-        }
-
-        .m3-navigation-drawer.collapsed .footer-action-item:hover {
-          transform: scale(1.08);
         }
 
         .icon-indicator.flame {
           color: var(--color-flame);
         }
 
-        /* Responsive Mobile Drawer Styling */
+        /* Mobile Layout & Smooth Slide-out Drawer */
         @media (max-width: 768px) {
+          .drawer-outer-wrapper {
+            position: relative !important;
+            height: auto;
+            z-index: 1000 !important;
+          }
+
           .mobile-drawer-backdrop {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(0, 0, 0, 0.65);
             backdrop-filter: blur(4px);
-            z-index: 990;
+            z-index: 990 !important;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+          }
+
+          .mobile-drawer-backdrop.active {
+            opacity: 1;
+            pointer-events: auto;
           }
 
           .m3-navigation-drawer {
@@ -376,28 +398,33 @@ export default function NavigationDrawer({
             top: 0; left: 0; bottom: 0;
             width: min(320px, calc(100vw - 56px)) !important;
             height: 100vh;
-            transform: translateX(-100%);
+            transform: translate3d(-100%, 0, 0) !important;
             box-shadow: none !important;
             border-right: none !important;
             z-index: 1000 !important;
+            overflow: hidden !important;
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+            will-change: transform;
           }
 
           .m3-navigation-drawer.mobile-open {
-            transform: translateX(0);
-            box-shadow: 0 0 32px rgba(0, 0, 0, 0.8) !important;
+            transform: translate3d(0, 0, 0) !important;
+            box-shadow: 0 0 36px rgba(0, 0, 0, 0.8) !important;
             border-right: 1px solid var(--md-sys-color-outline-variant) !important;
-            z-index: 1000 !important;
+          }
+
+          .m3-navigation-drawer.mobile-open .label-container,
+          .m3-navigation-drawer.mobile-open .brand-titles {
+            opacity: 1 !important;
           }
 
           .mobile-close-btn {
+            display: flex;
             width: 36px;
             height: 36px;
             border-radius: 50%;
             background-color: var(--md-sys-color-surface-container);
             color: var(--color-gold);
-            display: flex;
-            align-items: center;
-            justify-content: center;
           }
 
           .collapse-toggle-btn-floating {
@@ -405,6 +432,6 @@ export default function NavigationDrawer({
           }
         }
       `}</style>
-    </>
+    </div>
   );
 }
