@@ -102,15 +102,53 @@
   --md-sys-shape-corner-full: 9999px;
 }
 
-[data-theme="light"] {
-  /* Override custom palette variables for Light Mode */
-  --color-jet: #ededf2;
-  --color-night: #f8f9fc;
+[data-theme="dark"] {
+  color-scheme: dark;
 
-  /* M3 Light System Tokens */
-  --md-sys-color-primary: #b88d00;
-  --md-sys-color-on-primary: #ffffff;
-  --md-sys-color-primary-container: #fff1b8;
+  /* Authentic Material 3 Dark Palette */
+  --color-jet: #25232a;
+  --color-night: #141218;
+
+  --md-sys-color-primary: #eec643;
+  --md-sys-color-on-primary: #1d1b20;
+  --md-sys-color-primary-container: rgba(238, 198, 67, 0.18);
+  --md-sys-color-on-primary-container: #ffe89e;
+
+  --md-sys-color-secondary: #e24700;
+  --md-sys-color-on-secondary: #ffffff;
+  --md-sys-color-secondary-container: rgba(226, 71, 0, 0.2);
+  --md-sys-color-on-secondary-container: #ffdbd0;
+
+  --md-sys-color-background: #141218;
+  --md-sys-color-on-background: #e6e1e5;
+  
+  --md-sys-color-surface: #141218;
+  --md-sys-color-on-surface: #e6e1e5;
+  --md-sys-color-on-surface-variant: #cac4d0;
+  --md-sys-color-outline: #938f99;
+  --md-sys-color-outline-variant: #49454f;
+
+  /* M3 Dark Surface Container Levels */
+  --md-sys-color-surface-container-lowest: #0f0d13;
+  --md-sys-color-surface-container-low: #1d1b20;
+  --md-sys-color-surface-container: #211f26;
+  --md-sys-color-surface-container-high: #2b2930;
+  --md-sys-color-surface-container-highest: #36343b;
+
+  --glow-primary: 0 0 24px rgba(238, 198, 67, 0.25);
+  --glow-secondary: 0 0 24px rgba(226, 71, 0, 0.25);
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+
+  /* Authentic Material 3 Light Palette with Signature Gold Accent */
+  --color-jet: #f3edf7;
+  --color-night: #fdf8f6;
+
+  --md-sys-color-primary: #eec643;
+  --md-sys-color-on-primary: #101113;
+  --md-sys-color-primary-container: rgba(238, 198, 67, 0.22);
   --md-sys-color-on-primary-container: #3d2e00;
 
   --md-sys-color-secondary: #e24700;
@@ -121,34 +159,36 @@
   --md-sys-color-tertiary: #825500;
   --md-sys-color-on-tertiary: #ffffff;
 
-  --md-sys-color-background: #f8f9fc;
-  --md-sys-color-on-background: #191c20;
+  --md-sys-color-background: #fdf8f6;
+  --md-sys-color-on-background: #1d1b20;
   
-  --md-sys-color-surface: #ffffff;
-  --md-sys-color-on-surface: #191c20;
-  --md-sys-color-on-surface-variant: #44474e;
-  --md-sys-color-outline: #74777f;
-  --md-sys-color-outline-variant: #c4c6d0;
+  --md-sys-color-surface: #fdf8f6;
+  --md-sys-color-on-surface: #1d1b20;
+  --md-sys-color-on-surface-variant: #49454f;
+  --md-sys-color-outline: #79747e;
+  --md-sys-color-outline-variant: #cac4d0;
 
-  /* Light Surface Container Levels */
+  /* M3 Light Surface Container Levels */
   --md-sys-color-surface-container-lowest: #ffffff;
-  --md-sys-color-surface-container-low: #f3f3f8;
-  --md-sys-color-surface-container: #ededf2;
-  --md-sys-color-surface-container-high: #e7e7ec;
-  --md-sys-color-surface-container-highest: #e1e2e7;
+  --md-sys-color-surface-container-low: #f7f2fa;
+  --md-sys-color-surface-container: #f3edf7;
+  --md-sys-color-surface-container-high: #ece6f0;
+  --md-sys-color-surface-container-highest: #e6e0e9;
 
-  /* Light Elevation Shadows */
-  --md-sys-elevation-1: 0px 2px 8px rgba(0, 0, 0, 0.06), 0px 1px 2px rgba(0, 0, 0, 0.04);
-  --md-sys-elevation-2: 0px 4px 16px rgba(0, 0, 0, 0.08), 0px 2px 4px rgba(0, 0, 0, 0.04);
-  --md-sys-elevation-3: 0px 8px 24px rgba(0, 0, 0, 0.12), 0px 4px 8px rgba(0, 0, 0, 0.06);
+  /* M3 Light Shadows */
+  --md-sys-elevation-1: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 2px rgba(0, 0, 0, 0.08);
+  --md-sys-elevation-2: 0px 2px 6px rgba(0, 0, 0, 0.12), 0px 1px 2px rgba(0, 0, 0, 0.08);
+  --md-sys-elevation-3: 0px 4px 12px rgba(0, 0, 0, 0.14), 0px 2px 4px rgba(0, 0, 0, 0.08);
 
-  --glow-primary: 0 0 20px rgba(184, 141, 0, 0.2);
-  --glow-secondary: 0 0 20px rgba(226, 71, 0, 0.2);
+  --glow-primary: 0 0 20px rgba(122, 89, 0, 0.18);
+  --glow-secondary: 0 0 20px rgba(226, 71, 0, 0.18);
 }
 
 [data-theme="amoled"] {
-  /* Pure Pitch Black AMOLED Tokens */
-  --color-jet: #0a0b0d;
+  color-scheme: dark;
+
+  /* Refined Ultra Black AMOLED Palette */
+  --color-jet: #050607;
   --color-night: #000000;
 
   --md-sys-color-primary: #eec643;
@@ -166,19 +206,19 @@
   
   --md-sys-color-surface: #000000;
   --md-sys-color-on-surface: #ffffff;
-  --md-sys-color-on-surface-variant: #a0a5ad;
-  --md-sys-color-outline: #3a3d45;
-  --md-sys-color-outline-variant: #1a1c20;
+  --md-sys-color-on-surface-variant: #a0a5b0;
+  --md-sys-color-outline: #3d404b;
+  --md-sys-color-outline-variant: #1a1b22;
 
-  /* AMOLED Surface Container Levels */
+  /* AMOLED Surface Container Levels (Refined Subtle Contrast) */
   --md-sys-color-surface-container-lowest: #000000;
-  --md-sys-color-surface-container-low: #050607;
-  --md-sys-color-surface-container: #0a0b0d;
-  --md-sys-color-surface-container-high: #121316;
-  --md-sys-color-surface-container-highest: #1a1c21;
+  --md-sys-color-surface-container-low: #090a0d;
+  --md-sys-color-surface-container: #0d0e12;
+  --md-sys-color-surface-container-high: #121318;
+  --md-sys-color-surface-container-highest: #181920;
 
-  --glow-primary: 0 0 28px rgba(238, 198, 67, 0.35);
-  --glow-secondary: 0 0 28px rgba(226, 71, 0, 0.35);
+  --glow-primary: 0 0 28px rgba(238, 198, 67, 0.4);
+  --glow-secondary: 0 0 28px rgba(226, 71, 0, 0.4);
 }
 
 * {
@@ -250,12 +290,13 @@ body {
   }
 }
 
-/* Glassmorphism utility */
+/* Dynamic Panel Utility */
 .glass-panel {
-  background: rgba(45, 45, 42, 0.4);
+  background: var(--md-sys-color-surface-container-low);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(238, 198, 67, 0.12);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  box-shadow: var(--md-sys-elevation-1);
 }
 
 /* Animations */

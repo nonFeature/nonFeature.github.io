@@ -9,7 +9,7 @@ const GithubIcon = () => (
 );
 
 const DESTINATIONS = [
-  { id: 'overview', label: 'Главная', icon: 'home' },
+  { id: 'main', label: 'Главная', icon: 'home' },
   { id: 'projects', label: 'Проекты', icon: 'grid_view' },
   { id: 'docs', label: 'Документация', icon: 'auto_stories' },
   { id: 'contact', label: 'Связь', icon: 'alternate_email' }

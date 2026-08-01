@@ -5,11 +5,11 @@ import ProjectsSection from './components/ProjectsSection';
 import DocsSection from './components/DocsSection';
 import CommunitySection from './components/CommunitySection';
 
-const VALID_DESTINATIONS = ['overview', 'projects', 'docs', 'contact'];
+const VALID_DESTINATIONS = ['main', 'projects', 'docs', 'contact'];
 
 const getDestinationFromHash = () => {
   const hash = window.location.hash.replace('#', '').trim();
-  return VALID_DESTINATIONS.includes(hash) ? hash : 'overview';
+  return VALID_DESTINATIONS.includes(hash) ? hash : 'main';
 };
 
 export default function App() {
@@ -68,7 +68,7 @@ export default function App() {
       <div className={`m3-workspace ${collapsed ? 'drawer-collapsed' : ''}`}>
         <main className="m3-content-body">
           <div className="destination-pane animate-fade-in" key={activeDestination}>
-            {activeDestination === 'overview' && <OrgHome />}
+            {activeDestination === 'main' && <OrgHome />}
             {activeDestination === 'projects' && <ProjectsSection />}
             {activeDestination === 'docs' && <DocsSection />}
             {activeDestination === 'contact' && <CommunitySection />}
