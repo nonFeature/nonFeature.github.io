@@ -10,7 +10,7 @@ export default function OrgHome() {
       <style>{`
         .section-pane-container {
           width: 100%;
-          max-width: 1200px;
+          max-width: 1400px;
           margin: 0 auto;
         }
 
@@ -29,6 +29,15 @@ export default function OrgHome() {
           color: var(--md-sys-color-on-background);
           font-weight: 600;
           letter-spacing: -0.5px;
+        }
+
+        @media (max-width: 768px) {
+          .empty-content-card {
+            padding: 32px 16px;
+          }
+          .empty-content-card h2 {
+            font-size: 1.8rem;
+          }
         }
       `}</style>
     </div>

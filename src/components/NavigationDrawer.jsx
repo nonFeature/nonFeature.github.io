@@ -23,6 +23,7 @@ export default function NavigationDrawer({
   collapsed,
   onToggleCollapse,
   mobileOpen,
+  onToggleMobile,
   onCloseMobile
 }) {
   React.useEffect(() => {
@@ -41,6 +42,20 @@ export default function NavigationDrawer({
     if (onCloseMobile) onCloseMobile();
   };
 
+  const handleToggleBtnClick = () => {
+    if (window.innerWidth <= 768) {
+      if (onToggleMobile) {
+        onToggleMobile();
+      } else if (mobileOpen && onCloseMobile) {
+        onCloseMobile();
+      }
+    } else {
+      if (onToggleCollapse) onToggleCollapse();
+    }
+  };
+
+  const isExpanded = window.innerWidth <= 768 ? mobileOpen : !collapsed;
+
   return (
     <div className="drawer-outer-wrapper">
       {/* Backdrop overlay with smooth opacity transition */}
@@ -50,14 +65,14 @@ export default function NavigationDrawer({
       />
 
       <aside className={`m3-navigation-drawer ${collapsed ? 'collapsed' : ''} ${mobileOpen ? 'mobile-open' : ''}`}>
-        {/* Floating Toggle Button on Right Border (Desktop) */}
+        {/* Attached Toggle Button on Right Border (Desktop & Mobile) */}
         <button 
           className="collapse-toggle-btn-floating"
-          onClick={onToggleCollapse}
-          title={collapsed ? 'Развернуть меню' : 'Свернуть меню'}
+          onClick={handleToggleBtnClick}
+          title={isExpanded ? 'Свернуть меню' : 'Развернуть меню'}
         >
           <span className="material-symbols-outlined">
-            {collapsed ? 'chevron_right' : 'chevron_left'}
+            {isExpanded ? 'chevron_left' : 'chevron_right'}
           </span>
         </button>
 
@@ -69,11 +84,6 @@ export default function NavigationDrawer({
               <span className="brand-name">nonFeature</span>
             </div>
           </div>
-
-          {/* Close button on mobile */}
-          <button className="mobile-close-btn" onClick={onCloseMobile} title="Закрыть">
-            <span className="material-symbols-outlined">close</span>
-          </button>
         </div>
 
         {/* Drawer Destinations List */}
@@ -123,8 +133,9 @@ export default function NavigationDrawer({
 
       <style>{`
         .drawer-outer-wrapper {
-          position: sticky;
+          position: fixed;
           top: 0;
+          left: 0;
           height: 100vh;
           height: 100dvh;
           z-index: 100;
@@ -134,7 +145,10 @@ export default function NavigationDrawer({
           width: 300px;
           height: 100vh;
           height: 100dvh;
-          position: relative;
+          position: fixed;
+          top: 0;
+          left: 0;
+          bottom: 0;
           background-color: var(--color-jet);
           border-right: 1px solid var(--md-sys-color-outline-variant);
           display: flex;
@@ -170,10 +184,18 @@ export default function NavigationDrawer({
           transition: background-color 0.2s ease, transform 0.2s ease;
         }
 
-        .collapse-toggle-btn-floating:hover {
+        @media (hover: hover) {
+          .collapse-toggle-btn-floating:hover {
+            background-color: var(--color-gold);
+            color: #101113;
+            transform: scale(1.1);
+          }
+        }
+
+        .collapse-toggle-btn-floating:active {
+          transform: scale(0.92);
           background-color: var(--color-gold);
           color: #101113;
-          transform: scale(1.1);
         }
 
         .drawer-header {
@@ -275,10 +297,18 @@ export default function NavigationDrawer({
           transition: all 0.2s ease;
         }
 
-        .drawer-destination-item:hover {
+        @media (hover: hover) {
+          .drawer-destination-item:hover {
+            background-color: var(--md-sys-color-surface-container-high);
+            color: var(--color-gold);
+            border: 1px solid rgba(238, 198, 67, 0.25);
+          }
+        }
+
+        .drawer-destination-item:active {
           background-color: var(--md-sys-color-surface-container-high);
           color: var(--color-gold);
-          border: 1px solid rgba(238, 198, 67, 0.25);
+          transform: scale(0.98);
         }
 
         .drawer-destination-item.active {
@@ -343,49 +373,25 @@ export default function NavigationDrawer({
           overflow: hidden;
         }
 
-        .footer-action-item:hover {
+        @media (hover: hover) {
+          .footer-action-item:hover {
+            background-color: var(--md-sys-color-surface-container-high);
+            color: var(--color-gold);
+            border: 1px solid rgba(238, 198, 67, 0.25);
+          }
+
+          .sub-action-item:hover {
+            background-color: var(--md-sys-color-surface-container-high);
+            color: var(--color-gold);
+            border: 1px solid rgba(238, 198, 67, 0.25);
+          }
+        }
+
+        .footer-action-item:active,
+        .sub-action-item:active {
           background-color: var(--md-sys-color-surface-container-high);
           color: var(--color-gold);
-          border: 1px solid rgba(238, 198, 67, 0.25);
-        }
-
-        .contact-menu-wrapper {
-          display: flex;
-          flex-direction: column;
-          gap: 6px;
-        }
-
-        .contact-sub-items {
-          display: flex;
-          flex-direction: column;
-          gap: 6px;
-          padding-left: 12px;
-          transition: all 0.2s ease;
-        }
-
-        .sub-action-item {
-          display: flex;
-          align-items: center;
-          gap: 14px;
-          height: 48px;
-          padding: 0 8px;
-          border-radius: var(--md-sys-shape-corner-full);
-          background: var(--md-sys-color-surface-container-low);
-          border: 1px solid var(--md-sys-color-outline-variant);
-          color: var(--md-sys-color-on-surface-variant);
-          font-family: 'Google Sans', sans-serif;
-          font-size: 0.88rem;
-          cursor: pointer;
-          text-decoration: none;
-          transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
-          justify-content: flex-start;
-          overflow: hidden;
-        }
-
-        .sub-action-item:hover {
-          background-color: var(--md-sys-color-surface-container-high);
-          color: var(--color-gold);
-          border: 1px solid rgba(238, 198, 67, 0.25);
+          transform: scale(0.98);
         }
 
         .expand-arrow {
@@ -405,8 +411,11 @@ export default function NavigationDrawer({
         /* Mobile Layout & Smooth Slide-out Drawer */
         @media (max-width: 768px) {
           .drawer-outer-wrapper {
-            position: relative !important;
-            height: auto;
+            position: fixed !important;
+            top: 0;
+            left: 0;
+            width: 0 !important;
+            height: 0 !important;
             z-index: 1000 !important;
           }
 
@@ -432,7 +441,7 @@ export default function NavigationDrawer({
           .m3-navigation-drawer {
             position: fixed;
             top: 0; left: 0; bottom: 0;
-            width: min(320px, calc(100vw - 56px)) !important;
+            width: min(300px, calc(100vw - 56px)) !important;
             height: 100vh;
             height: 100dvh;
             height: -webkit-fill-available;
@@ -440,9 +449,9 @@ export default function NavigationDrawer({
             flex-direction: column !important;
             transform: translate3d(-100%, 0, 0) !important;
             box-shadow: none !important;
-            border-right: none !important;
+            border-right: 1px solid var(--md-sys-color-outline-variant) !important;
             z-index: 1000 !important;
-            overflow: hidden !important;
+            overflow: visible !important;
             transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
             will-change: transform;
           }
@@ -454,7 +463,6 @@ export default function NavigationDrawer({
           .m3-navigation-drawer.mobile-open {
             transform: translate3d(0, 0, 0) !important;
             box-shadow: 0 0 36px rgba(0, 0, 0, 0.8) !important;
-            border-right: 1px solid var(--md-sys-color-outline-variant) !important;
           }
 
           .m3-navigation-drawer.mobile-open .label-container,
@@ -462,17 +470,24 @@ export default function NavigationDrawer({
             opacity: 1 !important;
           }
 
-          .mobile-close-btn {
-            display: flex;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background-color: var(--md-sys-color-surface-container);
-            color: var(--color-gold);
+          .collapse-toggle-btn-floating {
+            display: flex !important;
+            position: absolute !important;
+            left: calc(100% - 2px) !important;
+            top: 24px !important;
+            width: 36px !important;
+            height: 48px !important;
+            border-radius: 0 16px 16px 0 !important;
+            background-color: var(--color-jet) !important;
+            border: 1px solid var(--md-sys-color-outline-variant) !important;
+            border-left: 1px solid var(--color-jet) !important;
+            color: var(--color-gold) !important;
+            box-shadow: 4px 2px 14px rgba(0, 0, 0, 0.45) !important;
+            z-index: 1010 !important;
           }
 
-          .collapse-toggle-btn-floating {
-            display: none;
+          .m3-navigation-drawer.mobile-open .collapse-toggle-btn-floating {
+            box-shadow: none !important;
           }
         }
       `}</style>

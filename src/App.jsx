@@ -51,16 +51,7 @@ export default function App() {
 
   return (
     <div className="m3-app-shell">
-      {/* Floating Mobile Trigger Button (Fixed z-index: 50, strictly lower than drawer z-index: 1000) */}
-      <button 
-        className="mobile-floating-trigger" 
-        onClick={() => setMobileOpen(true)}
-        title="Открыть меню"
-      >
-        <span className="material-symbols-outlined">chevron_right</span>
-      </button>
-
-      {/* Side Navigation Drawer */}
+      {/* Side Navigation Drawer with attached edge toggle button */}
       <NavigationDrawer
         activeDestination={activeDestination}
         onSelectDestination={setActiveDestination}
@@ -69,11 +60,12 @@ export default function App() {
         collapsed={collapsed}
         onToggleCollapse={() => setCollapsed(!collapsed)}
         mobileOpen={mobileOpen}
+        onToggleMobile={() => setMobileOpen(prev => !prev)}
         onCloseMobile={() => setMobileOpen(false)}
       />
 
       {/* Main Content Workspace */}
-      <div className="m3-workspace">
+      <div className={`m3-workspace ${collapsed ? 'drawer-collapsed' : ''}`}>
         <main className="m3-content-body">
           <div className="destination-pane animate-fade-in" key={activeDestination}>
             {activeDestination === 'overview' && <OrgHome />}
@@ -88,37 +80,11 @@ export default function App() {
         .m3-app-shell {
           display: flex;
           min-height: 100vh;
+          min-height: 100dvh;
           background-color: var(--md-sys-color-background);
           color: var(--md-sys-color-on-background);
-        }
-
-        /* Floating Mobile Trigger Button (Strictly z-index: 50) */
-        .mobile-floating-trigger {
-          display: none;
-          position: fixed;
-          top: 16px;
-          left: 16px;
-          width: 44px;
-          height: 44px;
-          border-radius: 50%;
-          background-color: var(--color-jet);
-          border: 1px solid var(--md-sys-color-outline-variant);
-          color: var(--color-gold);
-          align-items: center;
-          justify-content: center;
-          z-index: 50 !important;
-          box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
-          cursor: pointer;
-          transition: transform 0.2s ease, background-color 0.2s ease;
-        }
-
-        .mobile-floating-trigger:active {
-          transform: scale(0.92);
-        }
-
-        .mobile-floating-trigger:hover {
-          background-color: var(--color-gold);
-          color: #101113;
+          width: 100%;
+          overflow-x: hidden;
         }
 
         .m3-workspace {
@@ -126,6 +92,12 @@ export default function App() {
           display: flex;
           flex-direction: column;
           min-width: 0;
+          margin-left: 300px;
+          transition: margin-left 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .m3-workspace.drawer-collapsed {
+          margin-left: 78px;
         }
 
         .m3-content-body {
@@ -133,21 +105,29 @@ export default function App() {
           display: flex;
           flex-direction: column;
           padding: 32px;
+          width: 100%;
         }
 
         .destination-pane {
           flex: 1;
+          width: 100%;
         }
 
         @media (max-width: 768px) {
           .m3-app-shell {
             flex-direction: column;
+            width: 100%;
           }
-          .mobile-floating-trigger {
-            display: flex;
+
+          .m3-workspace,
+          .m3-workspace.drawer-collapsed {
+            margin-left: 0 !important;
+            width: 100%;
           }
+
           .m3-content-body {
-            padding: 20px 16px 16px 70px;
+            padding: 72px 16px 16px 16px;
+            width: 100%;
           }
         }
       `}</style>

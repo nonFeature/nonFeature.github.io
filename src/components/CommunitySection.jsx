@@ -36,6 +36,16 @@ export default function CommunitySection() {
           object-fit: contain;
           display: block;
         }
+
+        @media (max-width: 768px) {
+          .empty-content-card {
+            padding: 20px 16px;
+          }
+          .rounded-svyaz-img {
+            max-width: 90%;
+            border-radius: 28px;
+          }
+        }
       `}</style>
     </div>
   );
